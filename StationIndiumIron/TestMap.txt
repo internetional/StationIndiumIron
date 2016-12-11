@@ -1,0 +1,39 @@
+# Lines starting with # are comments and should be disregarded.
+# This file contains information about a map used to build the game world.
+# Included first is the world dimensions, symbolised as two tab-separated numbers,
+# being x and y in that order.
+#
+4	3
+#
+# Each tile consists of a set of features. Each line symbolises y on the x/y axis
+# and each tab denotes a change of x on the x/y axis.
+# The first map contains information about:
+# (1) height levels from 0 to 9
+# (2) survivors from 0 to 9
+# (3) base indicated by "b" or not base, indicated by empty string.
+#
+60	50	60	90
+70	40b	41	80
+50	50	60	73
+#
+# In the map above we find a hilly small landscape with 4 survivors and one base square.
+#
+# The second map contains information about resources. That is:
+# (1) Food, 0-9
+# (2) Medicine, 0-9
+# (3) Materials, 0-9
+#
+002	003	216	307
+312	000	403	215
+000	020	003	503
+#
+# The third map contains information about
+# (1) Threat level, 0-9
+# (2) Protection, 0-9
+# (3) Explored status, "e" if explored otherwise hidden
+#
+40e	20e	30e	44
+82	10e	21e	61
+10e	30e	52	80
+#
+# And that's pretty much it.
