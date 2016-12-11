@@ -1,6 +1,6 @@
 import pygame, sys, random
 from constants import *
-from Area import *
+from Map import *
 
 
 # Game initiation
@@ -15,14 +15,14 @@ pygame.mouse.set_visible(MOUSEVISIBLE)
 run_program = True
 mouse_coord = (0, 0)
 
+
 # groups
-areas = pygame.sprite.Group()
+map = Map()
+areas = map.areas
 
 # fill groups
-for x in range(1, WORLDWIDTH+1):
-    for y in range(1, WORLDHEIGHT+1):
-        Area(areas, (x,y), is_hidden=random.randint(0,1),
-             is_base=random.randint(0,1))
+tiles = load_map("TestMap.txt")
+[Area(*[areas]+x) for x in tiles]
 
 def main():
     while run_program:
@@ -70,6 +70,4 @@ def eventHandler(event):
         areas.update(mouse_coord, True)
 
 
-if __name__ == "__main__":
-    main()
 

@@ -77,5 +77,3 @@ class Area(sprite.Sprite):
     def set_protection(self, direction, new_protection):
         self.protection[direction] = new_protection
 
-
-

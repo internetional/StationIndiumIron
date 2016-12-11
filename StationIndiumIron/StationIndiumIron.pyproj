@@ -31,7 +31,13 @@
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Map.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StationIndiumIron.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestMap.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
