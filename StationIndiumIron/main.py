@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 from constants import *
 from Area import *
 
@@ -6,7 +6,8 @@ from Area import *
 # Game initiation
 pygame.init()
 FPSCLOCK = pygame.time.Clock()
-DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
+DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT),
+                                      pygame.FULLSCREEN)
 pygame.display.set_caption(GAMENAME)
 pygame.mouse.set_visible(MOUSEVISIBLE)
 
@@ -18,9 +19,10 @@ mouse_coord = (0, 0)
 areas = pygame.sprite.Group()
 
 # fill groups
-for x in range(1, 11):
-    for y in range(1, 11):
-        Area(areas, (x,y))
+for x in range(1, WORLDWIDTH+1):
+    for y in range(1, WORLDHEIGHT+1):
+        Area(areas, (x,y), is_hidden=random.randint(0,1),
+             is_base=random.randint(0,1))
 
 def main():
     while run_program:
@@ -30,9 +32,8 @@ def main():
         for event in pygame.event.get():
             eventHandler(event)
 
-        DISPLAYSURF.fill(GRAY)
+        DISPLAYSURF.fill(WORLDBGCOLOUR)
         areas.draw(DISPLAYSURF)
-        areas.update()
         
         pygame.display.update()
         FPSCLOCK.tick(FPS)
@@ -49,7 +50,7 @@ def eventHandler(event):
     actions. 
     
     """
-    global run_program
+    global run_program, mouse_coord
     
     if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
         run_program = False
@@ -60,6 +61,13 @@ def eventHandler(event):
             
     if event.type == KEYUP:
         print("KEYUP")
+
+    if event.type == MOUSEMOTION:
+        mouse_coord = event.pos
+        areas.update(mouse_coord)
+
+    if event.type == MOUSEBUTTONDOWN:
+        areas.update(mouse_coord, True)
 
 
 if __name__ == "__main__":
